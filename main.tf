@@ -6,7 +6,7 @@ resource "aws_vpc" "vpc" {
 }
 
 module "public_subnets" {
-  source = "github.com/door2door-io/d2d-terraform-subnet-public?ref=v0.0.1"
+  source = "./subnet-public"
 
   vpc_id                  = "${aws_vpc.vpc.id}"
   vpc_name                = "${var.name}"
@@ -17,14 +17,14 @@ module "public_subnets" {
 }
 
 module "nat_gateways" {
-  source = "github.com/door2door-io/d2d-terraform-nat-gateway?ref=v0.0.1"
+  source = "./nat-gateway"
 
   nat_gateway_count = "${(length(var.private_subnets) + length(var.database_subnets)) > 0 ? (var.nat_gateway_count < 0 ? length(var.public_subnets) : (var.nat_gateway_count > 0 ? var.nat_gateway_count : 0)) : 0}"
   public_subnets    = ["${module.public_subnets.subnet_ids}"]
 }
 
 module "private_subnets" {
-  source = "github.com/door2door-io/d2d-terraform-subnet-private?ref=v0.0.1"
+  source = "./subnet-private"
 
   vpc_id       = "${aws_vpc.vpc.id}"
   vpc_name     = "${var.name}"
@@ -36,7 +36,7 @@ module "private_subnets" {
 }
 
 module "database_subnets" {
-  source = "github.com/door2door-io/d2d-terraform-subnet-private?ref=v0.0.1"
+  source = "./subnet-private"
 
   name         = "database"
   vpc_id       = "${aws_vpc.vpc.id}"
