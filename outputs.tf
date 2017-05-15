@@ -7,7 +7,7 @@ output "vpc_name" {
 }
 
 output "vpc_cidr" {
-  value = "${var.vpc_cidr}"
+  value = "${var.cidr}"
 }
 
 output "public_subnet_ids" {
