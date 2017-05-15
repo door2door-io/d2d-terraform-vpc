@@ -6,6 +6,10 @@ output "vpc_name" {
   value = "${var.name}"
 }
 
+output "vpc_cidr" {
+  value = "${var.vpc_cidr}"
+}
+
 output "public_subnet_ids" {
   value = ["${module.public_subnets.subnet_ids}"]
 }
