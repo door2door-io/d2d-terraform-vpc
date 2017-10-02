@@ -9,6 +9,7 @@ Module Input Variables
 
 - `nat_gateway_count` - number of NAT Gateways to create
 - `public_subnets` - list of public subnets IDs to create NAT Gateways in
+- `tags` - dictionary of tags that will be added to resources created by the module
 
 
 Usage
