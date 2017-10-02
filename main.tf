@@ -21,6 +21,8 @@ module "nat_gateways" {
 
   nat_gateway_count = "${(length(var.private_subnets) + length(var.database_subnets)) > 0 ? (var.nat_gateway_count < 0 ? length(var.public_subnets) : (var.nat_gateway_count > 0 ? var.nat_gateway_count : 0)) : 0}"
   public_subnets    = ["${module.public_subnets.subnet_ids}"]
+  vpc_name          = "${var.name}"
+  tags              = "${merge(var.tags, map("VPC", var.name))}"
 }
 
 module "private_subnets" {
