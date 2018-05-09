@@ -35,7 +35,7 @@ output "database_route_table_ids" {
 }
 
 output "database_subnet_group" {
-  value = ["${aws_db_subnet_group.database.id}"]
+  value = ["${join(",", aws_db_subnet_group.database.*.id)}"]
 }
 
 output "nat_gateway_ips" {

@@ -7,5 +7,5 @@ output "route_table_ids" {
 }
 
 output "igw_id" {
-  value = "${aws_internet_gateway.igw.id}"
+  value = "${join("", aws_internet_gateway.igw.*.id)}"
 }
